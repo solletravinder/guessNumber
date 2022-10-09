@@ -11,14 +11,13 @@ class GuessNumber:
         guess = input(f"Please guess a number ({self.min_value} - {self.max_value}): ")
         if self.valid_guess(guess):
             return int(guess)
-        else:
-            print("Please enter a valid number.")
-            return self.get_guess()
+        print("Please enter a valid number.")
+        return self.get_guess()
 
     def take_range_and_continue(self):
-        range = input(f"Please enter a range(hyphen separated, e.g, 0-100): ")
-        if self.valid_range(range):
-            min_value, max_value = range.split("-")
+        range_val = input("Please enter a range(hyphen separated, e.g, 0-100): ")
+        if self.valid_range(range_val):
+            min_value, max_value = range_val.split("-")
             return GuessNumber(int(min_value), int(max_value)).play()
         else:
             print("Please enter a valid range(hyphen separated, e.g, 0-100).")
@@ -35,7 +34,7 @@ class GuessNumber:
         try:
             min_value, max_value = range.split("-")
             min_value, max_value = int(min_value), int(max_value)
-        except:
+        except Exception as e:
             return False
         return True
 
