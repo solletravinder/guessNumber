@@ -1,5 +1,6 @@
 import random
 
+
 class GuessNumber:
 
     def __init__(self, min_value, max_value):
@@ -35,9 +36,9 @@ class GuessNumber:
             min_value, max_value = range.split("-")
             min_value, max_value = int(min_value), int(max_value)
         except Exception as e:
+            print(e)
             return False
         return True
-
 
     def play(self):
         while 1:
@@ -48,17 +49,13 @@ class GuessNumber:
             elif guess > self.number:
                 print("Your guess was over.")
             else:
-                break;
+                break
 
         print(f"You guessed it in {self.guesses} guesses.")
-        play_more = input("Do you wanna play more?")
-        if play_more == '' or (play_more and play_more.lower() == 'no'):
+        if not self.play_more():
             return
         self.take_range_and_continue()
 
-
-
-
-# if "__name__" == "__main__":
-#     GN = GuessNumber(0, 5)
-#     GN.play()
+    def play_more(self):
+        play_more = input("Do you wanna play more?")
+        return play_more != '' and (not play_more or play_more.lower() != 'no')
